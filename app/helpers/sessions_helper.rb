@@ -17,7 +17,7 @@ module SessionsHelper
        @current_user ||= User.find_by(id: user_id)
      elsif (user_id = cookies.signed[:user_id]) #vérifie si l'utilisateur a des cookies permettant l'authentification
        user = User.find_by(id: user_id) #compare les cookies à la BDD
-       if user && user.authenticated?(cookies[:remember_token]) #si l'utilisateur existe en que l'authentification avec le token crypté de notre BDD
+       if user && user.authenticated?(:remember, cookies[:remember_token]) #si l'utilisateur existe en que l'authentification avec le token crypté de notre BDD
          log_in user
          @current_user = user
        end

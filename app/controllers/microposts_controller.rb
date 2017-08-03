@@ -22,10 +22,10 @@ class MicropostsController < ApplicationController
 
   private
 
-# modifier seulement le content des posts
-    def micropost_params
-      params.require(:micropost).permit(:content)
-    end
+# modifier seulement le content des posts et les pictures
+def micropost_params
+ params.require(:micropost).permit(:content, :picture)
+end
     def correct_user
      @micropost = current_user.microposts.find_by(id: params[:id])
      redirect_to root_url if @micropost.nil?

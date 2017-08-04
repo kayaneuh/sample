@@ -88,7 +88,7 @@ class User < ApplicationRecord
  # See "Following users" for the full implementation.
  #selectionne tous les posts du user
  def feed
-   Micropost.where("user_id = ?", id)
+   Micropost.where("user_id IN (?) OR user_id = ?", following_ids, id)
  end
 
  # Follows a user.
